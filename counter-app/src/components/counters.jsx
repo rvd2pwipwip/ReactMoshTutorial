@@ -4,15 +4,19 @@ import Counter from "./counter";
 class Counters extends Component {
   state = {
     counters: [
-      { id: 1, value: 4 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-      { id: 4, value: 0 }
+      { id: 1, value: 1 },
+      { id: 2, value: 2 },
+      { id: 3, value: 3 },
+      { id: 4, value: 4 }
     ]
   };
 
-  handleDelete = e => {
-    console.log(this.state);
+  handleDelete = id => {
+    const counters = this.state.counters.filter(counter => counter.id !== id);
+    this.setState(prevState => {
+      return { counters };
+    });
+    // this.setState({ counters });
   };
 
   render() {
@@ -21,9 +25,10 @@ class Counters extends Component {
         {this.state.counters.map(counter => (
           <Counter
             key={counter.id}
-            id={counter.id}
-            value={counter.value}
+            // id={counter.id}
+            // value={counter.value}
             onDelete={this.handleDelete}
+            counter={counter}
           />
         ))}
       </div>
