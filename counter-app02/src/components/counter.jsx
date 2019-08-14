@@ -2,8 +2,7 @@ import * as React from "react";
 
 const Counter = () => {
   const [count, setCount] = React.useState(0);
-
-  // useEffect(() = {}, count)
+  const [tags, setTags] = React.useState(["tag1", "tag2", "tag3"]);
 
   const formatCount = () => {
     return count === 0 ? "Zero" : count;
@@ -12,7 +11,23 @@ const Counter = () => {
   return (
     <>
       <span className={getBadgeClasses(count)}>{formatCount()}</span>
-      <button className="btn btn-secondary btn-sm">+</button>
+      <button
+        onClick={e => {
+          setCount(count + 1);
+        }}
+        className="btn btn-secondary btn-sm"
+      >
+        +
+      </button>
+      {tags.length ? (
+        <ul>
+          {tags.map((tag, i) => (
+            <li key={i}>{tag}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No items in the list</p>
+      )}
     </>
   );
 };
