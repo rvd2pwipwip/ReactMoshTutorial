@@ -8,6 +8,12 @@ const Counter = () => {
     return count === 0 ? "Zero" : count;
   };
 
+  const getBadgeClasses = count => {
+    let classes = "badge m-2 badge-";
+    classes += count === 0 ? "warning" : "primary";
+    return classes;
+  };
+
   return (
     <>
       <span className={getBadgeClasses(count)}>{formatCount()}</span>
@@ -33,9 +39,3 @@ const Counter = () => {
 };
 
 export default Counter;
-
-const getBadgeClasses = count => {
-  let classes = "badge m-2 badge-";
-  classes += count === 0 ? "warning" : "primary";
-  return classes;
-};
