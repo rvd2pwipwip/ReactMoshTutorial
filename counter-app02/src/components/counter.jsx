@@ -4,6 +4,10 @@ const Counter = () => {
   const [count, setCount] = React.useState(0);
   const [tags, setTags] = React.useState(["tag1", "tag2", "tag3"]);
 
+  React.useEffect(() => {
+    document.title = `Counter: ${count}`;
+  });
+
   const formatCount = () => {
     return count === 0 ? "Zero" : count;
   };
