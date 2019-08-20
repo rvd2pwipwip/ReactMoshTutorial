@@ -4,19 +4,17 @@ import { getMovies } from "./../services/fakeMovieService";
 const Movies = () => {
   const [movies, setMovies] = React.useState(getMovies);
 
-  React.useEffect(() => {});
-
   const handleDelete = id => {
     setMovies(movies.filter(m => m._id !== id));
   };
 
+  const count = movies.length;
+  // const { length: count } = movies; //useless es6 destructuring...
+
+  if (!count) return <p>There are no movies in the database.</p>;
   return (
     <>
-      {movies ? (
-        <p>Showing {movies.length} movies in the database.</p>
-      ) : (
-        <p>There are no movies in the database.</p>
-      )}
+      <p>Showing {count} movies in the database.</p>
       <table className="table">
         <thead>
           <tr>
@@ -28,7 +26,7 @@ const Movies = () => {
           </tr>
         </thead>
         <tbody>
-          {Object.values(movies).map(m => (
+          {movies.map(m => (
             <tr key={m._id}>
               <td>{m.title}</td>
               <td>{m.genre.name}</td>
