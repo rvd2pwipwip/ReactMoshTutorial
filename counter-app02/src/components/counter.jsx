@@ -1,43 +1,37 @@
 import * as React from "react";
 
-const Counter = () => {
-  const [count, setCount] = React.useState(0);
-  const [tags, setTags] = React.useState(["tag1", "tag2", "tag3"]);
+const Counter = props => {
+  const [value, setValue] = React.useState(props.value);
 
   React.useEffect(() => {
-    document.title = `Counter: ${count}`;
+    document.title = `Counter: ${value}`;
   });
 
-  const formatCount = () => {
-    return count === 0 ? "Zero" : count;
+  const formatValue = () => {
+    return value === 0 ? "Zero" : value;
   };
 
-  const getBadgeClasses = count => {
+  const getBadgeClasses = value => {
     let classes = "badge m-2 badge-";
-    classes += count === 0 ? "warning" : "primary";
+    classes += value === 0 ? "warning" : "primary";
     return classes;
   };
 
+  console.log(props);
+
   return (
     <>
-      <span className={getBadgeClasses(count)}>{formatCount()}</span>
+      <span className={getBadgeClasses(value)} style={{ width: 40 }}>
+        {formatValue()}
+      </span>
       <button
-        onClick={e => {
-          setCount(count + 1);
+        onClick={() => {
+          setValue(value + 1);
         }}
         className="btn btn-secondary btn-sm"
       >
         +
       </button>
-      {tags.length ? (
-        <ul>
-          {tags.map((tag, i) => (
-            <li key={i}>{tag}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No items in the list</p>
-      )}
     </>
   );
 };
