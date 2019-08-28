@@ -1,14 +1,8 @@
 import * as React from "react";
 
 const Counter = props => {
-  const [value, setValue] = React.useState(props.value);
-
-  React.useEffect(() => {
-    document.title = `Counter: ${value}`;
-  });
-
   const formatValue = () => {
-    return value === 0 ? "Zero" : value;
+    return props.counter.value === 0 ? "Zero" : props.counter.value;
   };
 
   const getBadgeClasses = value => {
@@ -17,20 +11,28 @@ const Counter = props => {
     return classes;
   };
 
-  console.log(props);
-
   return (
     <>
-      <span className={getBadgeClasses(value)} style={{ width: 40 }}>
-        {formatValue()}
-      </span>
+      <div style={{ display: "inline-block", width: 50 }}>
+        <span
+          className={getBadgeClasses(props.counter.value)}
+          style={{ width: "auto" }}
+        >
+          {formatValue()}
+        </span>
+      </div>
       <button
-        onClick={() => {
-          setValue(value + 1);
-        }}
+        onClick={() => props.onIncrement(props.counter)}
         className="btn btn-secondary btn-sm"
       >
         +
+      </button>
+      <button
+        type="button"
+        onClick={() => props.onDelete(props.counter.id)}
+        className="btn btn-danger btn-sm m-2"
+      >
+        X
       </button>
     </>
   );
