@@ -19,7 +19,7 @@ const Counters = () => {
     // 2. get index of incremented counter
     const index = tempCounters.indexOf(counter);
     // 3. incremented counter value + 1
-    tempCounters[index].value += 1;
+    tempCounters[index].value++;
     // 4. set state counters to temporary counters
     setCounters(tempCounters);
   };
