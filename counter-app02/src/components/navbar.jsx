@@ -1,12 +1,12 @@
 import React from "react";
 
-const Navbar = ({ counters }) => {
+const Navbar = ({ activeCounters }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="#">
         Navbar
         <span className="badge badge-pill badge-secondary m-2">
-          {`${counters.filter(c => c.value > 0).length}`}
+          {activeCounters}
         </span>
       </a>
     </nav>

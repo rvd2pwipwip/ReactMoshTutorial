@@ -26,6 +26,13 @@ const App = () => {
     setCounters(tempCounters);
   };
 
+  const handleDecrement = counter => {
+    const tempCounters = [...counters];
+    const index = tempCounters.indexOf(counter);
+    tempCounters[index].value--;
+    setCounters(tempCounters);
+  };
+
   const handleReset = () => {
     setCounters(
       counters.map(c => {
@@ -37,11 +44,14 @@ const App = () => {
 
   return (
     <>
-      <Navbar counters={counters}></Navbar>
+      <Navbar
+        activeCounters={counters.filter(c => c.value > 0).length}
+      ></Navbar>
       <main role="main" className="container">
         <Counters
           counters={counters}
           onIncrement={handleIncrement}
+          onDecrement={handleDecrement}
           onDelete={handleDelete}
           onReset={handleReset}
         />

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-const Counter = props => {
+const Counter = ({ counter, onIncrement, onDecrement, onDelete }) => {
   const formatValue = () => {
-    return props.counter.value === 0 ? "Zero" : props.counter.value;
+    return counter.value === 0 ? "Zero" : counter.value;
   };
 
   const getBadgeClasses = value => {
@@ -12,29 +12,33 @@ const Counter = props => {
   };
 
   return (
-    <>
-      <div style={{ display: "inline-block", width: 50 }}>
-        <span
-          className={getBadgeClasses(props.counter.value)}
-          style={{ width: "auto" }}
-        >
-          {formatValue()}
-        </span>
+    <div className="row">
+      <div className="col-1">
+        <span className={getBadgeClasses(counter.value)}>{formatValue()}</span>
       </div>
-      <button
-        onClick={() => props.onIncrement(props.counter)}
-        className="btn btn-secondary btn-sm"
-      >
-        +
-      </button>
-      <button
-        type="button"
-        onClick={() => props.onDelete(props.counter.id)}
-        className="btn btn-danger btn-sm m-2"
-      >
-        X
-      </button>
-    </>
+      <div className="col">
+        <button
+          onClick={() => onIncrement(counter)}
+          className="btn btn-secondary btn-sm"
+        >
+          +
+        </button>
+        <button
+          onClick={() => onDecrement(counter)}
+          className="btn btn-secondary btn-sm m-2"
+          disabled={counter.value > 0 ? false : true}
+        >
+          -
+        </button>
+        <button
+          type="button"
+          onClick={() => onDelete(counter.id)}
+          className="btn btn-danger btn-sm"
+        >
+          X
+        </button>
+      </div>
+    </div>
   );
 };
 
