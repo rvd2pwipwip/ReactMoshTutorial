@@ -7,10 +7,7 @@ import Like from "./common/Like";
 import Pagination from "./common/Pagination";
 
 const Movies = () => {
-  // const [movies, setMovies] = React.useState(getMovies);
   const [movies, setMovies] = React.useState([]);
-  // add All Genres to spreaded getGenres array
-  // const [filters, setFilters] = React.useState([{ _id: 0, name: "All Genres" }, ...getGenres()]);
   const [filters, setFilters] = React.useState([]);
   const [pageSize] = React.useState(4);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -18,8 +15,9 @@ const Movies = () => {
 
   React.useEffect(() => {
     setMovies(getMovies);
+    // add All Genres to spreaded getGenres array
     setFilters([{ _id: 0, name: "All Genres" }, ...getGenres()]);
-  });
+  }, [movies], [filters]);
 
   const handleDelete = id => {
     setMovies(movies.filter(m => m._id !== id));
@@ -55,8 +53,6 @@ const Movies = () => {
         <div className="col-3">
           <FilterGroup
             items={filters}
-            textProperty="name"
-            valueProperty="_id"
             currentFilter={currentFilter}
             onSelectFilter={handleSelectFilter}
           />
